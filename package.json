@@ -5,9 +5,11 @@
   "author": "@lerockit",
   "scripts": {
     "dev": "clear && cross-env NODE_ENV=dev ts-node-dev -r tsconfig-paths/register --respawn -- src/main.ts",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "save-images": "ts-node -r tsconfig-paths/register src/jobs/save-images.ts"
   },
   "dependencies": {
+    "aws-sdk": "^2.874.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

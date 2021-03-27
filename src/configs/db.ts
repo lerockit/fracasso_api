@@ -12,7 +12,7 @@ export const mongoConnect = async (): Promise<Connection> => {
     password,
     port: +port,
     synchronize: false,
-    entities: [path.resolve(__dirname, '../modules/*/*-entity.ts')],
+    entities: [path.resolve(__dirname, '../app/modules/*/*-entity.ts')],
     authSource: 'admin',
   })
 

@@ -11,4 +11,10 @@ export const env = {
     port: process.env.MONGO_PORT,
     database: process.env.MONGO_DATABASE,
   },
+  aws: {
+    region: process.env.AWS_REGION,
+    S3BucketName: process.env.AWS_S3_BUCKET_NAME,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    screctAcessKey: process.env.AWS_SECRECT_ACESS_KEY,
+  },
 }
