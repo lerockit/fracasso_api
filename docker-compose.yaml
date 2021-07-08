@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
   mongo-express:
@@ -6,6 +6,7 @@ services:
     ports:
       - ${ME_PORT}:8081
     environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_BASICAUTH_USERNAME: ${ME_USER}
       ME_CONFIG_BASICAUTH_PASSWORD: ${ME_PASSWORD}
       ME_CONFIG_MONGODB_PORT: ${MONGO_PORT}
@@ -23,16 +24,16 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     ports:
-      - "${MONGO_PORT}:27017"
+      - '${MONGO_PORT}:27017'
     volumes:
       - mongo-data:/data/db
     networks:
       - mongo-compose-network
     restart: unless-stopped
 
-networks: 
-    mongo-compose-network:
-      driver: bridge
+networks:
+  mongo-compose-network:
+    driver: bridge
 
 volumes:
   mongo-data:

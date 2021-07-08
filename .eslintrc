@@ -15,7 +15,7 @@
     },
     "rules": {
       "prettier/prettier": "error",
-      "no-console": "error",
+      "no-console": "off",
       "no-undef": "off",
       "@typescript-eslint/ban-ts-comment": "off",
       "@typescript-eslint/ban-types": "off",
