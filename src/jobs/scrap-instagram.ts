@@ -1,18 +1,32 @@
 import { runAsyncCommand } from '@/utils/command'
-import { unlink } from 'fs/promises'
+import { readFile, unlink, writeFile } from 'fs/promises'
 import path from 'path'
 
-const COMMAND = 'instagram-scraper lerockit --media-types image --latest-stamps instagram-scraper-log.txt'
-const PROFILE_PIC_PATH = path.resolve(
-  __dirname,
-  '../',
-  '../',
-  'lerockit/',
-  '132092568_692080181417617_6270145563782521990_n.jpg',
-)
+const profileName = 'lerockit'
+const profileIdFilePath = path.resolve(__dirname, '../', '../', `${profileName}/`, 'id')
+const logPath = path.resolve(__dirname, '../', '../', 'scrap.log')
 
 export const runScrapInstagramJob = async () => {
-  await runAsyncCommand(COMMAND)
-  await unlink(PROFILE_PIC_PATH)
+  const previousDateString = await getPreviousDateString()
+  const commandFilters = previousDateString ? `--post-filter="date_utc > ${previousDateString}"` : ''
+  const commandParams = '-V --no-video-thumbnails --no-captions --no-metadata-json --no-profile-pic'
+  const command = `instaloader ${commandFilters} profile ${profileName} ${commandParams}`
+  await runAsyncCommand(command)
+  await unlink(profileIdFilePath)
+  await writeFile(logPath, generateNowDateString())
   console.log('Scraped successfully')
+}
+
+const generateNowDateString = () => {
+  const now = new Date()
+  return `datetime(${now.getFullYear()}, ${now.getMonth() + 1}, ${now.getDate()})`
+}
+
+const getPreviousDateString = async () => {
+  try {
+    const dateString = await readFile(logPath, { encoding: 'utf-8' })
+    return dateString
+  } catch {
+    return null
+  }
 }

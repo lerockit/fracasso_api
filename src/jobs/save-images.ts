@@ -8,8 +8,9 @@ const runSaveImagesJob = async () => {
   try {
     await runScrapInstagramJob()
     const imagesUploaded = await runSaveImageAwsJob()
+    if (!imagesUploaded.data.length) return console.log('Nothing updated')
     await ImagesService.saveImages(imagesUploaded.data)
-    console.log('Images saved successfully')
+    console.log('Images saved successfully on database')
     await runRemoveImagesJobs(imagesUploaded.streams)
   } catch (error) {
     throw new Error(error)

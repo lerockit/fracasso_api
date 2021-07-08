@@ -1,5 +1,5 @@
 /node_modules
 /coachdefracassos
 .env
-instagram-scraper-log.txt
+scrap.log
 /fakeimages
