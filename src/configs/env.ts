@@ -17,4 +17,5 @@ export const env = {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     screctAcessKey: process.env.AWS_SECRECT_ACESS_KEY,
   },
+  instagramUsername: process.env.INSTAGRAM_USERNAME,
 }

@@ -7,4 +7,9 @@ export const ImagesRepository = {
     const connection = getConnection().manager
     await connection.insert(Image, imagesData)
   },
+
+  async findAllImages(): Promise<Image[]> {
+    const connection = getConnection().manager
+    return await connection.find(Image)
+  },
 }

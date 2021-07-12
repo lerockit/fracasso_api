@@ -1,8 +1,9 @@
+import { env } from '@/configs/env'
 import { runAsyncCommand } from '@/utils/command'
 import { readFile, unlink, writeFile } from 'fs/promises'
 import path from 'path'
 
-const profileName = 'lerockit'
+const profileName = env.instagramUsername
 const profileIdFilePath = path.resolve(__dirname, '../', '../', `${profileName}/`, 'id')
 const logPath = path.resolve(__dirname, '../', '../', 'scrap.log')
 

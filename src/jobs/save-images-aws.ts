@@ -1,10 +1,10 @@
-import { env } from '@/configs'
+import { env } from '@/configs/env'
 import { readAllFilesFromDir } from '@/utils/read-dir'
 import { uploadS3 } from '@/utils/s3'
 import AWS from 'aws-sdk'
 import path from 'path'
 
-const { aws: awsEnv } = env
+const { aws: awsEnv, instagramUsername } = env
 
 const s3Client = new AWS.S3({
   maxRetries: 2,
@@ -17,7 +17,7 @@ const s3Client = new AWS.S3({
   secretAccessKey: awsEnv.screctAcessKey,
 })
 
-const imagesDirPath = path.resolve(__dirname, '../', '../', 'lerockit/')
+const imagesDirPath = path.resolve(__dirname, '../', '../', `${instagramUsername}/`)
 
 process.on('unhandledRejection', (e) => console.log(e))
 
@@ -41,6 +41,6 @@ export const runSaveImageAwsJob = async () => {
       streams: imageFileStreams,
     }
   } catch (e) {
-    console.error(e)
+    throw new Error(e)
   }
 }

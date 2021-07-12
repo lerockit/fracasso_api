@@ -9,6 +9,5 @@ export const runApp = (): void => {
   app.use(cors())
   app.use(express.json())
   app.use(routes)
-  // eslint-disable-next-line no-console
   app.listen(appPort, () => console.log(`Running on port ${appPort}`))
 }

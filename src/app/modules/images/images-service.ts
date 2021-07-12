@@ -1,9 +1,9 @@
+import { Image } from './image-entity'
 import { ImagesRepository } from './images-repository'
-import { SaveImageType } from './images-types'
 
 export const ImagesService = {
-  findRandomImage() {},
-  async saveImages(imagesData: SaveImageType[]): Promise<void> {
-    await ImagesRepository.saveImages(imagesData)
+  async findRandomImage(): Promise<Image> {
+    const allImages = await ImagesRepository.findAllImages()
+    return allImages[Math.floor(Math.random() * allImages.length)]
   },
 }
